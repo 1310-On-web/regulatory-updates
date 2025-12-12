@@ -61,12 +61,9 @@ jobs:
             if git diff --staged --quiet; then
               echo "No staged changes to commit"
             else
-              TIMESTAMP=$(python - <<'PY'
-from datetime import datetime, timezone, timedelta
-ist = timezone(timedelta(hours=5, minutes=30))
-print(datetime.now(ist).isoformat())
-PY
-)
+              # produce IST ISO timestamp without invoking Python (more robust in YAML)
+              # requires coreutils 'date' with TZ support (available on ubuntu-latest)
+              TIMESTAMP=$(TZ='Asia/Kolkata' date --iso-8601=seconds)
               git commit -m "chore: update RBI entries — ${TIMESTAMP}"
               git push
               echo "Committed and pushed changes."
