@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p data
           if [ ! -f data/rbi_master.csv ]; then
-            echo "id,date,title,link,pdf_filename,pdf_downloaded,source_page,created_at" > data/rbi_master.csv
+            echo "id,date,title,link,pdf_link,pdf_filename,pdf_downloaded,source_page,created_at" > data/rbi_master.csv
             git add data/rbi_master.csv || true
           fi
 
